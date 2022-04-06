@@ -26,7 +26,7 @@ exit_on_signal_SIGTERM() {
 trap exit_on_signal_SIGINT SIGINT
 trap exit_on_signal_SIGTERM SIGTERM
 
-DIR=$HOME/termux_gui/codz;
+DIR=$HOME/termux-gui/codz;
 # [ -e $FSTART ] && echo "$FSTART exist." || echo "$FSTART does not exist."
 ## 
 vnc_start() {
