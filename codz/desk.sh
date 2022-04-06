@@ -30,39 +30,46 @@ DIR=$HOME/termux_gui/codz;
 # [ -e $FSTART ] && echo "$FSTART exist." || echo "$FSTART does not exist."
 ## 
 vnc_start() {
-  echo -e ${ORANGE}"
-  \\n${CHECK_MARK} Starting....."; 
-  echo ${WHITE}""
+  # Export Display		
+  clear
+  export DISPLAY=":1"		
+  if [[ $(pidof Xvnc) ]]; then	
+  echo -e "${CHECK_MARK} ${RED} Desktop Is Allredy Running";
+    { vncserver -list; echo; }	
+  else
+  echo -e "${CHECK_MARK} ${ORANGE} Starting....."; 
   vncserver
-  #vncserver -listen tcp 
-	#vncserver -list
-	#termux-open vnc://127.0.0.1:5901
+  fi
 }
 ## 
 vnc_stop () {
-  echo -e ${ORANGE}"\\n${CHECK_MARK} Killing....."; 
+  clear
+    if [[ $(pidof Xvnc) ]]; then	
+  { vncserver -list; echo; }
+  echo -e "${CHECK_MARK} ${ORANGE}  Killing....."; 
   killall Xvnc
   rm -rf $HOME/.vnc/localhost:1.pid
   rm -rf $PREFIX/tmp/.X1-lock
   rm -rf $PREFIX/tmp/.X11-unix/X1;
-  echo -e ${RED}"\\n${CHECK_MARK} Killd....."; 
+  echo -e "${CHECK_MARK} ${RED}  Killd.....";
+  else
+  echo -e "${CHECK_MARK} ${RED} Termux GUI Desktop Not Running";
+  fi
 }
 ## 
 vnc_rest() { 
-# Export Display		
-export DISPLAY=":1"		
 	if [[ $(pidof Xvnc) ]]; then	
-	echo -e ${GREEN}"\\n${CHECK_MARK} Server Running"
+	echo -e "${CHECK_MARK} ${GREEN}  Server Running"
 	{ vncserver -list; echo; }	
 	sleep 1
 	vnc_stop
+	sleep 1
 	echo;
-	clear
 	sleep 1
 	vnc_start
 	sleep 1
-	echo -e ${GREEN}"\\n${CHECK_MARK} VNC Server Restarting Done";
-	else echo -e "Termux GUI Desktop Not Running!"; 
+	echo -e "${CHECK_MARK}${GREEN}  VNC Server Restarting Done";
+	else echo -e "${CHECK_MARK} ${ORANGE} Termux GUI Desktop Not Running!"; 
 	fi
 
 }
@@ -70,46 +77,41 @@ export DISPLAY=":1"
 
 ## 
 vnc_on_of() {
- echo ${GREEN}" Enter 1 To Start Desktop"
- echo ${GREEN}" Enter 2 To Stop Desktop"
- echo ${GREEN}" Enter 3 To Restart Desktop"
- echo ${GREEN}" Enter 0 To Cancel"
+  	{ vncserver -list; echo; }	
+ echo "${GREEN} Enter 1 To Start Desktop"
+ echo "${GREEN} Enter 2 To Stop Desktop"
+ echo "${GREEN} Enter 3 To Restart Desktop"
+ echo "${GREEN} Enter 0 To Cancel"
  echo "
  "
-read -p "Enter: " input_no
-##################
-if (($input_no  == 1)); then
-  echo -e ${GREEN}" Please Wait......"
-  sleep 1
-  
+read -p " Enter: " input_no
   ############################
+if (($input_no  == 1)); then
+  echo -e "${CHECK_MARK} ${GREEN} Please Wait......"
+  sleep 1
   vnc_start
-  echo -e ${GREEN}" ${CHECK_MARK} Done."
-  echo -e ${GREEN}" "
+  ############################
 elif (($input_no  == 2)); then
-  echo -e ${GREEN}" Please Wait......"
+  echo -e "${CHECK_MARK} ${GREEN} Please Wait......"
   sleep 1
   vnc_stop
-  
-  ########################
+  sleep 1
+  ############################
 elif (($input_no  == 3)); then
-  echo -e ${GREEN}" \e Please Wait......"
+  echo -e "${CHECK_MARK} ${GREEN} Please Wait......"
   sleep 1
   vnc_rest
+  sleep 1
 else (($input_no  == 0));
 clear
 
-echo ${CYAN}"Cancel";
+echo "${CHECK_MARK} ${CYAN}   Canceld";
 fi
 }
 ############################################
 clear
 cd $HOME
+
 vnc_on_of
-
-
-
-
 cd $HOME
 
-##   echo "$HOME/desk.sh" > $PREFIX/bin/desk chmod +x $PREFIX/bin/desk
