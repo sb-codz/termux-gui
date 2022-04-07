@@ -30,7 +30,7 @@ trap exit_on_signal_SIGTERM SIGTERM
 DIR=$HOME/termux-gui/codz;
 
   ## vnc and xfce4 pkg
-  _pkgs=(tigervnc xfce4 xfce4-terminal xfce-theme-manager xfce4-appfinder xfce4-clipman-plugin xfce4-places-plugin xfce4-notes-plugin xfce4-goodies desktop-file-utils audacious leafpad pavucontrol-qt hexchat geany xarchiver thunar unzip otter-browser rofi gzip wget parole )
+  _pkgs=(tigervnc xfce4 xfce4-terminal xfce-theme-manager xfce4-appfinder xfce4-clipman-plugin xfce4-places-plugin xfce4-notes-plugin xfce4-goodies desktop-file-utils audacious leafpad pavucontrol-qt hexchat geany xarchiver thunar unzip otter-browser rofi gzip ugit wget parole )
   setup_vnc_xfce_pkg() {
 	echo -e ${RED}"\n[*] Installing Termux Desktop..."
 	echo -e "    _______________ ${CHECK_MARK} _______________"
