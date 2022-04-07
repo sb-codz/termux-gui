@@ -115,8 +115,8 @@ DIR=$HOME/termux-gui/codz;
 	sleep 1
 	echo -e "    _______________ ${CHECK_MARK} _______________"
 	#link folder 
-	echo "${CYAN}Link storage data..."
-  ln -s $HOME/storage/music Music
+	#echo "${CYAN}Link storage data..."
+  #ln -s $HOME/storage/music Music
   sleep 1
   echo -e "    _______________ ${CHECK_MARK} _______________"
   }
