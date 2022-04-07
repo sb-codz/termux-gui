@@ -11,7 +11,13 @@ CHECK_MARK="\033[0;32m\xE2\x9C\x94\033[0m"
 
 DIR=$HOME/termux-gui/codz;
 # [ -e $FSTART ] && echo "$FSTART exist." || echo "$FSTART does not exist."
-
+xstertup_setup () { 
+  # Remove Old And Defuld xstartup File
+  rm $HOME/.vnc/xstartup
+  # Coppy New Modifid xstartup File
+  cp $DIR/xstartup $HOME/.vnc/xstartup
+  chmod u+x ~/.vnc/xstartup
+}
 vnc_start() {
   # Export Display		
   clear
@@ -64,6 +70,7 @@ vnc_on_of() {
  echo "${GREEN} Enter 1 To Start Desktop"
  echo "${GREEN} Enter 2 To Stop Desktop"
  echo "${GREEN} Enter 3 To Restart Desktop"
+ echo "${GREEN} Enter 4 To Fix Blank Or Black Screen"
  echo "${GREEN} Enter 0 To Cancel"
  echo "
  "
@@ -85,9 +92,16 @@ elif (($input_no  == 3)); then
   sleep 1
   vnc_rest
   sleep 1
+  ###########################
+elif (($input_no  == 4)); then
+  echo -e "  ${CHECK_MARK} ${GREEN} Please Wait......Fixing."
+  xstertup_setup
+  sleep 1
+  echo -e "  ${CHECK_MARK} ${CYAN}  Done"
+  echo -e "  ${CHECK_MARK} ${WHITE}  Please run Start/Restart program again."
+  ############################
 else (($input_no  == 0));
 clear
-
 echo -e "  ${CHECK_MARK} ${CYAN}  Options Canceld";
 fi
 }
